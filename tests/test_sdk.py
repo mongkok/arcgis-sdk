@@ -28,7 +28,7 @@ def test_self(client):
         responses.GET,
         arcgis_sdk.ARCGIS_API_URL + 'portals/self',
         body=json.dumps({
-            'total': 1
+            'name': 'test'
         }),
         status=200,
         content_type='application/json'
