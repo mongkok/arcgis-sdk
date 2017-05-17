@@ -119,6 +119,23 @@ def test_update_group(client):
 
 
 @responses.activate
+def test_delete_group(client, users):
+    responses.add(
+        responses.POST,
+        arcgis_sdk.ARCGIS_API_URL + 'community/groups/test/delete',
+        body=json.dumps({
+            'success': True
+        }),
+        status=200,
+        content_type='application/json'
+    )
+
+    assert client.delete_group(
+        group_id='test'
+    )['success'] is True
+
+
+@responses.activate
 def test_add_users_to_group(client, users):
     responses.add(
         responses.POST,
@@ -151,6 +168,25 @@ def test_invite_to_group(client, users):
     assert client.invite_to_group(
         group_id='test',
         users=users
+    )['success'] is True
+
+
+@responses.activate
+def test_add_item(client, users):
+    responses.add(
+        responses.POST,
+        arcgis_sdk.ARCGIS_API_URL + 'content/users/test/addItem',
+        body=json.dumps({
+            'success': True
+        }),
+        status=200,
+        content_type='application/json'
+    )
+
+    assert client.add_item(
+        username='test',
+        title='my item',
+        type='Web Mapping Application'
     )['success'] is True
 
 
