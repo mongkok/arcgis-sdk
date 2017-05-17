@@ -1,0 +1,6 @@
+coverage>=4.3.4
+flake8>=3.3.0
+pytest>=3.0.7
+pytest-cov>=2.4.0
+requests>=2.14.2
+responses>=0.5.1
