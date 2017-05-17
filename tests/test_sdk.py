@@ -28,13 +28,28 @@ def test_self(client):
         responses.GET,
         arcgis_sdk.ARCGIS_API_URL + 'portals/self',
         body=json.dumps({
-            'name': 'test'
+            'total': 1
         }),
         status=200,
         content_type='application/json'
     )
 
     assert client.self()['name'] == 'test'
+
+
+@responses.activate
+def test_self_users(client):
+    responses.add(
+        responses.GET,
+        arcgis_sdk.ARCGIS_API_URL + 'portals/self/users',
+        body=json.dumps({
+            'total': 1
+        }),
+        status=200,
+        content_type='application/json'
+    )
+
+    assert client.self_users()['total'] == 1
 
 
 @responses.activate

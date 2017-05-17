@@ -40,24 +40,21 @@ class ArcgisAPI(object):
     def self(self):
         return self.request('portals/self')
 
+    def self_users(self, **params):
+        return self.request('portals/self/users', params=params)
+
     def users(self, **params):
-        return self.request(
-            'community/users',
-            params=params)
+        return self.request('community/users', params=params)
 
     def user_detail(self, username):
         return self.request(
             "community/users/{username}".format(username=username))
 
     def groups(self, **params):
-        return self.request(
-            'community/groups',
-            params=params)
+        return self.request('community/groups', params=params)
 
     def create_group(self, **data):
-        return self.post(
-            'community/createGroup',
-            data=data)
+        return self.post('community/createGroup', data=data)
 
     def group_detail(self, group_id):
         return self.request(
