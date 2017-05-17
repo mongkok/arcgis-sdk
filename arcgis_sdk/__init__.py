@@ -123,7 +123,7 @@ class ArcgisAPIError(Exception):
 
         if isinstance(result, dict):
             self.code = result['error']['code']
-            self.details = result['error']['details']
+            self.details = result['error'].get('details')
             self.message = result['error']['message']
         else:
             self.code = code
