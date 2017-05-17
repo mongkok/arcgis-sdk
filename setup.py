@@ -17,7 +17,7 @@ def get_version(package):
 
 
 setup(
-    name='arcgis_sdk',
+    name='arcgis-sdk',
     version=get_version('arcgis_sdk'),
     license='MIT',
     description='Python SDK for Arcgis API',
