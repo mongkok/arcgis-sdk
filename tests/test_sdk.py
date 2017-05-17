@@ -101,6 +101,23 @@ def test_create_group(client):
 
 
 @responses.activate
+def test_group_detail(client):
+    responses.add(
+        responses.GET,
+        arcgis_sdk.ARCGIS_API_URL + 'community/groups/test',
+        body=json.dumps({
+            'id': 'test'
+        }),
+        status=200,
+        content_type='application/json'
+    )
+
+    assert client.group_detail(
+        group_id='test'
+    )['id'] == 'test'
+
+
+@responses.activate
 def test_update_group(client):
     responses.add(
         responses.POST,

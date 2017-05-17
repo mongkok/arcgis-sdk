@@ -59,28 +59,32 @@ class ArcgisAPI(object):
             'community/createGroup',
             data=data)
 
+    def group_detail(self, group_id):
+        return self.request(
+            "community/groups/{group_id}".format(group_id=group_id))
+
     def update_group(self, group_id, **data):
         return self.post(
-            'community/groups/{group_id}/update'.format(group_id=group_id),
+            "community/groups/{group_id}/update".format(group_id=group_id),
             data=data)
 
     def delete_group(self, group_id):
         return self.post(
-            'community/groups/{group_id}/delete'.format(group_id=group_id))
+            "community/groups/{group_id}/delete".format(group_id=group_id))
 
     def add_users_to_group(self, group_id, users):
         return self.post(
-            'community/groups/{group_id}/addUsers'.format(group_id=group_id),
+            "community/groups/{group_id}/addUsers".format(group_id=group_id),
             data={'users': users})
 
     def invite_to_group(self, group_id, **data):
         return self.post(
-            'community/groups/{group_id}/invite'.format(group_id=group_id),
+            "community/groups/{group_id}/invite".format(group_id=group_id),
             data=data)
 
     def add_item(self, username, **data):
         return self.post(
-            'content/users/{username}/addItem'.format(username=username),
+            "content/users/{username}/addItem".format(username=username),
             data=data)
 
     def post(self, *args, **kwargs):
