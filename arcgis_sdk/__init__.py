@@ -96,18 +96,14 @@ class ArcgisAPI(object):
                 'f': 'json'
             })
 
-        try:
-            response = self.session.request(
-                method or 'GET',
-                ARCGIS_API_URL + path,
-                data=data,
-                params=params,
-                proxies=self.proxies,
-                timeout=self.timeout,
-                files=files)
-
-        except requests.HTTPError as err:
-            raise ArcgisAPIError(err.read())
+        response = self.session.request(
+            method or 'GET',
+            ARCGIS_API_URL + path,
+            data=data,
+            params=params,
+            proxies=self.proxies,
+            timeout=self.timeout,
+            files=files)
 
         if not 200 <= response.status_code < 300:
             raise ArcgisAPIError(code=response.status_code)
