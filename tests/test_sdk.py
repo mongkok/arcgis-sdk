@@ -53,6 +53,21 @@ def test_self_users(client):
 
 
 @responses.activate
+def test_self_roles(client):
+    responses.add(
+        responses.GET,
+        arcgis_sdk.ARCGIS_API_URL + 'portals/self/roles',
+        body=json.dumps({
+            'total': 1
+        }),
+        status=200,
+        content_type='application/json'
+    )
+
+    assert client.self_roles()['total'] == 1
+
+
+@responses.activate
 def test_search_users(client):
     responses.add(
         responses.GET,
@@ -151,7 +166,7 @@ def test_update_group(client):
 
 
 @responses.activate
-def test_delete_group(client, users):
+def test_delete_group(client):
     responses.add(
         responses.POST,
         arcgis_sdk.ARCGIS_API_URL + 'community/groups/test/delete',
@@ -168,7 +183,7 @@ def test_delete_group(client, users):
 
 
 @responses.activate
-def test_add_users_to_group(client, users):
+def test_add_to_group(client, users):
     responses.add(
         responses.POST,
         arcgis_sdk.ARCGIS_API_URL + 'community/groups/test/addUsers',
@@ -179,7 +194,7 @@ def test_add_users_to_group(client, users):
         content_type='application/json'
     )
 
-    assert 'added' in client.add_users_to_group(
+    assert 'added' in client.add_to_group(
         group_id='test',
         users=users
     )
@@ -204,7 +219,52 @@ def test_invite_to_group(client, users):
 
 
 @responses.activate
-def test_add_item(client, users):
+def test_user_items(client):
+    responses.add(
+        responses.GET,
+        arcgis_sdk.ARCGIS_API_URL + 'content/users/test',
+        body=json.dumps({
+            'total': 1
+        }),
+        status=200,
+        content_type='application/json'
+    )
+
+    assert client.user_items('test')['total'] == 1
+
+
+@responses.activate
+def test_group_items(client):
+    responses.add(
+        responses.GET,
+        arcgis_sdk.ARCGIS_API_URL + 'content/groups/test',
+        body=json.dumps({
+            'total': 1
+        }),
+        status=200,
+        content_type='application/json'
+    )
+
+    assert client.group_items('test')['total'] == 1
+
+
+@responses.activate
+def test_item_detail(client):
+    responses.add(
+        responses.GET,
+        arcgis_sdk.ARCGIS_API_URL + 'content/items/test',
+        body=json.dumps({
+            'id': 'test'
+        }),
+        status=200,
+        content_type='application/json'
+    )
+
+    assert client.item_detail('test')['id'] == 'test'
+
+
+@responses.activate
+def test_add_item(client):
     responses.add(
         responses.POST,
         arcgis_sdk.ARCGIS_API_URL + 'content/users/test/addItem',
@@ -223,23 +283,38 @@ def test_add_item(client, users):
 
 
 @responses.activate
+def test_share_item(client, groups):
+    responses.add(
+        responses.POST,
+        arcgis_sdk.ARCGIS_API_URL + 'content/items/test/share',
+        body=json.dumps({
+            'itemId': 'test'
+        }),
+        status=200,
+        content_type='application/json'
+    )
+
+    assert client.share_item('test', groups)['itemId'] == 'test'
+
+
+@responses.activate
 def test_server_error(client):
     responses.add(
         responses.GET,
-        arcgis_sdk.ARCGIS_API_URL + 'error',
+        arcgis_sdk.ARCGIS_API_URL,
         status=500,
         content_type='application/json'
     )
 
     with pytest.raises(arcgis_sdk.ArcgisAPIError):
-        client.request('error')
+        client.request('')
 
 
 @responses.activate
 def test_exception(client):
     responses.add(
         responses.GET,
-        arcgis_sdk.ARCGIS_API_URL + 'error',
+        arcgis_sdk.ARCGIS_API_URL,
         body=json.dumps({
             'error': {
                 'code': 400,
@@ -252,4 +327,4 @@ def test_exception(client):
     )
 
     with pytest.raises(arcgis_sdk.ArcgisAPIError):
-        client.request('error')
+        client.request('')

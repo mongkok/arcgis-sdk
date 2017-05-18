@@ -8,5 +8,10 @@ def client(request):
 
 
 @pytest.fixture(scope='module')
+def groups(request):
+    return 'group1,group2'
+
+
+@pytest.fixture(scope='module')
 def users(request):
     return 'alice,bob'

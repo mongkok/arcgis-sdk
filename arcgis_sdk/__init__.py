@@ -43,6 +43,9 @@ class ArcgisAPI(object):
     def self_users(self, **params):
         return self.request('portals/self/users', params=params)
 
+    def self_roles(self, **params):
+        return self.request('portals/self/roles', params=params)
+
     def users(self, **params):
         return self.request('community/users', params=params)
 
@@ -69,20 +72,39 @@ class ArcgisAPI(object):
         return self.post(
             "community/groups/{group_id}/delete".format(group_id=group_id))
 
-    def add_users_to_group(self, group_id, users):
+    def add_to_group(self, group_id, users):
         return self.post(
             "community/groups/{group_id}/addUsers".format(group_id=group_id),
-            data={'users': users})
+            data=dict(users=users))
 
     def invite_to_group(self, group_id, **data):
         return self.post(
             "community/groups/{group_id}/invite".format(group_id=group_id),
             data=data)
 
+    def user_items(self, username, **params):
+        return self.request(
+            "content/users/{username}".format(username=username),
+            params=params)
+
+    def group_items(self, group_id, **params):
+        return self.request(
+            "content/groups/{group_id}".format(group_id=group_id),
+            **params)
+
+    def item_detail(self, item_id):
+        return self.request(
+            "content/items/{item_id}".format(item_id=item_id))
+
     def add_item(self, username, **data):
         return self.post(
             "content/users/{username}/addItem".format(username=username),
             data=data)
+
+    def share_item(self, item_id, groups):
+        return self.post(
+            "content/items/{item_id}/share".format(item_id=item_id),
+            data=dict(groups=groups))
 
     def post(self, *args, **kwargs):
         return self.request(method='POST', *args, **kwargs)
