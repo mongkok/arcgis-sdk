@@ -90,7 +90,7 @@ class ArcgisAPI(object):
     def group_items(self, group_id, **params):
         return self.request(
             "content/groups/{group_id}".format(group_id=group_id),
-            **params)
+            params=params)
 
     def item_detail(self, item_id):
         return self.request(
