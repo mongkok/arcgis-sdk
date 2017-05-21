@@ -1,5 +1,4 @@
 import arcgis_sdk
-import json
 import pytest
 import responses
 
