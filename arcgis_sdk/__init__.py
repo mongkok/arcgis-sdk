@@ -109,7 +109,7 @@ class ArcgisAPI(object):
     def post(self, *args, **kwargs):
         return self.request(method='POST', *args, **kwargs)
 
-    def request(self, path, params=None, data=None, files=None, method=None):
+    def get_params(self, params=None):
         if params is None:
             params = dict()
 
@@ -119,11 +119,14 @@ class ArcgisAPI(object):
                 'f': 'json'
             })
 
+        return params
+
+    def request(self, path, params=None, data=None, files=None, method=None):
         response = self.session.request(
             method or 'GET',
             ARCGIS_API_URL + path,
             data=data,
-            params=params,
+            params=self.get_params(params),
             proxies=self.proxies,
             timeout=self.timeout,
             files=files)
