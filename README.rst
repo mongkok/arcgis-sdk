@@ -70,5 +70,5 @@ Tests
 .. |Codecov| image:: https://img.shields.io/codecov/c/github/mongkok/arcgis-sdk.svg
    :target: https://codecov.io/gh/mongkok/arcgis-sdk
 
-.. |Code Climate| image:: https://codeclimate.com/repos/591ba9a23d5c4f029e00066f/badges/438f3c0c9a97b67fcf32/gpa.svg
-   :target: https://codeclimate.com/repos/591ba9a23d5c4f029e00066f/feed
+.. |Code Climate| image:: https://codeclimate.com/github/mongkok/arcgis-sdk/badges/gpa.svg
+   :target: https://codeclimate.com/github/mongkok/arcgis-sdk
