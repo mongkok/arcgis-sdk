@@ -9,7 +9,7 @@ Python SDK for Arcgis API
 import requests
 
 
-__version__ = '0.0.6'
+__version__ = '0.0.7'
 
 ARCGIS_API_URL = 'https://www.arcgis.com/sharing/rest/'
 
