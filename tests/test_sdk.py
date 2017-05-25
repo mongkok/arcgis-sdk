@@ -75,6 +75,19 @@ def test_user_detail(client):
 
 
 @responses.activate
+def test_user_thumbnail(client):
+    add_response(
+        'GET',
+        'community/users/test/info/me.png',
+        content_type='image/png',
+        body=':)',
+        stream=True
+    )
+
+    assert client.user_thumbnail('test', 'me.png').data == ':)'
+
+
+@responses.activate
 def test_search_groups(client):
     add_response(
         'GET',
