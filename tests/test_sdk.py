@@ -84,7 +84,7 @@ def test_user_thumbnail(client):
         stream=True
     )
 
-    assert client.user_thumbnail('test', 'me.png').data == ':)'
+    assert client.user_thumbnail('test', 'me.png').data == b':)'
 
 
 @responses.activate
