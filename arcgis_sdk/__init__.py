@@ -154,11 +154,10 @@ class ArcgisAPI(object):
         if not 200 <= response.status_code < 300:
             raise ArcgisAPIError(code=response.status_code)
 
-        if 'stream' in kwargs:
-            response.raw.decode_content = True
-            return response.raw
-
-        result = response.json()
+        try:
+            result = response.json()
+        except ValueError:
+            return response.content
 
         if result.get('error'):
             raise ArcgisAPIError(result)

@@ -84,7 +84,24 @@ def test_user_thumbnail(client):
         stream=True
     )
 
-    assert client.user_thumbnail('test', 'me.png').data == b':)'
+    assert client.user_thumbnail('test', 'me.png') == b':)'
+
+
+@responses.activate
+def test_user_thumbnail_exception(client):
+    add_response(
+        'GET',
+        'community/users/test/info/me.png',
+        content_type='image/png',
+        json={
+            'error': {
+                'code': 500,
+                'message': 'User info file does not exist or is inaccessible'
+            }
+        })
+
+    with pytest.raises(arcgis_sdk.ArcgisAPIError):
+        client.user_thumbnail('test', 'me.png')
 
 
 @responses.activate
