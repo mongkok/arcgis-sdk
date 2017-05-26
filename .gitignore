@@ -22,3 +22,5 @@ __pycache__
 build/
 coverage.xml
 dist/
+
+sftp-config.json
