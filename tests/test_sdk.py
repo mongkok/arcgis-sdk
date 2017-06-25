@@ -31,6 +31,19 @@ def test_self(client):
 
 
 @responses.activate
+def test_update_self(client):
+    add_response(
+        'POST',
+        'portals/self',
+        json={'success': True}
+    )
+
+    assert client.update_self(
+        templatesGroupQuery='id:test'
+    )['success'] is True
+
+
+@responses.activate
 def test_self_users(client):
     add_response(
         'GET',

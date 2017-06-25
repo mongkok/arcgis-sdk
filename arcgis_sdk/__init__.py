@@ -40,6 +40,9 @@ class ArcgisAPI(object):
     def self(self):
         return self.request('portals/self')
 
+    def update_self(self, **data):
+        return self.post('portals/self', data=data)
+
     def self_users(self, **params):
         return self.request('portals/self/users', params=params)
 
