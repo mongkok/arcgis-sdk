@@ -112,6 +112,15 @@ class ArcgisAPI(object):
             "content/users/{username}/addItem".format(username=username),
             data=data)
 
+    def update_item(self, username, item_id, data, **kwargs):
+        return self.post(
+            "content/users/{username}/items/{item_id}/update".format(
+                username=username,
+                item_id=item_id
+            ),
+            data=data,
+            **kwargs)
+
     def share_item(self, item_id, groups):
         return self.post(
             "content/items/{item_id}/share".format(item_id=item_id),

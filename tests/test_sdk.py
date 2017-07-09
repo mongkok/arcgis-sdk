@@ -255,6 +255,17 @@ def test_add_item(client):
 
 
 @responses.activate
+def test_update_item(client):
+    add_response(
+        'POST',
+        'content/users/test/items/test-item/update',
+        json={'id': 'test-item'}
+    )
+
+    assert client.update_item('test', 'test-item', {})['id'] == 'test-item'
+
+
+@responses.activate
 def test_share_item(client, groups):
     add_response(
         'POST',
