@@ -54,8 +54,7 @@ class ArcgisAPI(object):
 
     def user_detail(self, username):
         return self.request(
-            "community/users/{username}".format(username=username)
-        )
+            "community/users/{username}".format(username=username))
 
     def user_thumbnail(self, username, filename):
         return self.request(
@@ -63,8 +62,7 @@ class ArcgisAPI(object):
                 username=username,
                 filename=filename
             ),
-            stream=True
-        )
+            stream=True)
 
     def groups(self, **params):
         return self.request('community/groups', params=params)
@@ -74,60 +72,50 @@ class ArcgisAPI(object):
 
     def group_detail(self, group_id):
         return self.request(
-            "community/groups/{group_id}".format(group_id=group_id)
-        )
+            "community/groups/{group_id}".format(group_id=group_id))
 
     def update_group(self, group_id, **data):
         return self.post(
             "community/groups/{group_id}/update".format(group_id=group_id),
-            data=data
-        )
+            data=data)
 
     def delete_group(self, group_id):
         return self.post(
-            "community/groups/{group_id}/delete".format(group_id=group_id)
-        )
+            "community/groups/{group_id}/delete".format(group_id=group_id))
 
     def add_to_group(self, group_id, users):
         return self.post(
             "community/groups/{group_id}/addUsers".format(group_id=group_id),
-            data=dict(users=users)
-        )
+            data=dict(users=users))
 
     def invite_to_group(self, group_id, **data):
         return self.post(
             "community/groups/{group_id}/invite".format(group_id=group_id),
-            data=data
-        )
+            data=data)
 
     def user_items(self, username, **params):
         return self.request(
             "content/users/{username}".format(username=username),
-            params=params
-        )
+            params=params)
 
     def group_items(self, group_id, **params):
         return self.request(
             "content/groups/{group_id}".format(group_id=group_id),
-            params=params
-        )
+            params=params)
 
     def item_detail(self, item_id):
         return self.request(
-            "content/items/{item_id}".format(item_id=item_id)
-        )
+            "content/items/{item_id}".format(item_id=item_id))
 
     def add_item(self, username, **data):
         return self.post(
             "content/users/{username}/addItem".format(username=username),
-            data=data
-        )
+            data=data)
 
     def share_item(self, item_id, groups):
         return self.post(
             "content/items/{item_id}/share".format(item_id=item_id),
-            data=dict(groups=groups)
-        )
+            data=dict(groups=groups))
 
     def post(self, *args, **kwargs):
         return self.request(method='POST', *args, **kwargs)
@@ -151,8 +139,7 @@ class ArcgisAPI(object):
             params=self.get_params(params),
             proxies=self.proxies,
             timeout=self.timeout,
-            **kwargs
-        )
+            **kwargs)
 
         if not 200 <= response.status_code < 300:
             raise ArcgisAPIError(code=response.status_code)
