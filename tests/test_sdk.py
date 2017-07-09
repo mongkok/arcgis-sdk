@@ -34,7 +34,7 @@ def test_self(client):
 def test_update_self(client):
     add_response(
         'POST',
-        'portals/self',
+        'portals/self/update',
         json={'success': True}
     )
 
