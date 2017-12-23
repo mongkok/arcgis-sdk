@@ -85,8 +85,8 @@ class ArcgisAPI(object):
 
     def add_to_group(self, group_id, users):
         return self.post(
-            "community/groups/{group_id}/addUsers".format(group_id=group_id),
-            data=dict(users=users))
+            'community/groups/{group_id}/addUsers'.format(group_id=group_id),
+            data={'users': users})
 
     def invite_to_group(self, group_id, **data):
         return self.post(
@@ -123,15 +123,15 @@ class ArcgisAPI(object):
 
     def share_item(self, item_id, groups):
         return self.post(
-            "content/items/{item_id}/share".format(item_id=item_id),
-            data=dict(groups=groups))
+            'content/items/{item_id}/share'.format(item_id=item_id),
+            data={'groups': groups})
 
     def post(self, *args, **kwargs):
         return self.request(method='POST', *args, **kwargs)
 
     def get_params(self, params=None):
         if params is None:
-            params = dict()
+            params = {}
 
         if params.get('grant_type') != 'refresh_token':
             params.update({
