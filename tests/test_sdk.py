@@ -1,6 +1,7 @@
-import arcgis_sdk
 import pytest
 import responses
+
+import arcgis_sdk
 
 from .shortcuts import add_response
 
