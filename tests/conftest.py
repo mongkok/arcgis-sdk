@@ -1,5 +1,6 @@
-import arcgis_sdk
 import pytest
+
+import arcgis_sdk
 
 
 @pytest.fixture(scope='module')

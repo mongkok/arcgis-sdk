@@ -1,5 +1,6 @@
-import arcgis_sdk
 import responses
+
+import arcgis_sdk
 
 
 def add_response(method, path, **kwargs):
@@ -9,5 +10,4 @@ def add_response(method, path, **kwargs):
     responses.add(
         getattr(responses, method),
         arcgis_sdk.ARCGIS_API_URL + path,
-        **kwargs
-    )
+        **kwargs)
