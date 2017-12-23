@@ -1,8 +1,7 @@
 import os
 import re
 
-from setuptools import find_packages
-from setuptools import setup
+from setuptools import find_packages, setup
 
 
 def get_long_description():
@@ -28,7 +27,7 @@ setup(
     url='https://github.com/mongkok/arcgis-sdk/',
     packages=find_packages(exclude=['tests*']),
     install_requires=[
-        'requests>=2.14.2'
+        'requests>=2.14.2',
     ],
     classifiers=[
         'Development Status :: 1 - Planning',
@@ -43,11 +42,11 @@ setup(
     ],
     zip_safe=False,
     setup_requires=[
-        'pytest-runner'
+        'pytest-runner',
     ],
     tests_require=[
         'pytest>=3.0.7',
         'requests>=2.14.2',
-        'responses>=0.5.1'
-    ]
+        'responses>=0.5.1',
+    ],
 )
